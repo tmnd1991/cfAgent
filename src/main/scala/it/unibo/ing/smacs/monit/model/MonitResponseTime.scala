@@ -8,5 +8,5 @@ import java.net.URL
 
 import scala.concurrent.duration.Duration
 case class MonitResponseTime(d : Duration, url : String, mode : String) {
-  override val toString = d + " " + url.toString + " " + mode
+  override def toString = d + " " + url.toString + " " + mode
 }

@@ -21,8 +21,8 @@ case class MonitProcessInfo(name              : String,
                             cpu_percent_total : Float,
                             data_collected    : Date,
                             port_response_time: Option[MonitResponseTime],
-                            unix_socket_response_time : Option[MonitResponseTime]){
-  override lazy val toString = {
+                            unix_socket_response_time : Option[MonitResponseTime]) extends MonitInfo{
+  override def toString = {
     "Process -> " + name + "\n"+
     "status -> " + status + "\n"+
     "monitoring status -> " + monitoring_status + "\n"+
@@ -46,7 +46,7 @@ case class MonitProcessInfo(name              : String,
   }
 }
 object MonitProcessInfo{
-  def apply(name              : Option[String],
+  def applyOpt(name              : Option[String],
             status            : Option[MonitStatus],
             monitoring_status : Option[MonitMonitoringStatus],
             pid               : Option[Int],

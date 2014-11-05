@@ -8,7 +8,7 @@ import myUtils.URLUtils
 /**
  * Created by tmnd on 03/11/14.
  */
-object ResponseTimeParser extends IResponseTimeParser{
+object ResponseTimeParser extends Parser[MonitResponseTime,Seq[String]]{
   val myDurationParser = DurationParser
   override def parse(seq: Seq[String]) = {
     val d = myDurationParser.parse(List(seq.head))

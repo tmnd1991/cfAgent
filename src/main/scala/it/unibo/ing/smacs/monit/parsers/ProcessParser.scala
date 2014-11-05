@@ -9,7 +9,7 @@ import java.util.Date
 /**
  * Created by tmnd on 31/10/14.
  */
-object ProcessParser extends IProcessParser{
+object ProcessParser extends Parser[MonitProcessInfo,String]{
   val dateFormat = "EEE MMM dd HH:mm:ss yyyy"
   val myDurationParser = DurationParser
   val myResponseTimeParse = ResponseTimeParser
@@ -77,7 +77,7 @@ object ProcessParser extends IProcessParser{
         unix_socket_response_time = myResponseTimeParse.parseOption(fields.tail.tail.tail.tail)//Some(x.trim)
       }
     }
-    MonitProcessInfo(name,status,monitStatus,pid,parent_pid,
+    MonitProcessInfo.applyOpt(name,status,monitStatus,pid,parent_pid,
       uptime,children,memory_kilobytes,memory_kilobytes_total,
       memory_percent,memory_percent_total,cpu_percent,cpu_percent_total,
       data_collected,port_response_time,unix_socket_response_time)

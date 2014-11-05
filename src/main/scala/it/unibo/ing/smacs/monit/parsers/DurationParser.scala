@@ -9,7 +9,7 @@ import scala.concurrent.duration.{FiniteDuration, Duration}
 /**
  * Created by tmnd on 01/11/14.
  */
-object DurationParser extends IDurationParser{
+object DurationParser extends Parser[Duration,Seq[String]]{
   override def parse(seq : Seq[String]) = {
     var total = Duration.Zero
     for(ds <- seq){
