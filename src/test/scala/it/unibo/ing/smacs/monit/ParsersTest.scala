@@ -5,6 +5,7 @@ import java.io.{IOException, InputStreamReader, BufferedReader}
 import it.unibo.ing.smacs.monit.model.JsonConversions._
 import it.unibo.ing.smacs.monit.model.MonitStatus
 import it.unibo.ing.smacs.monit.parsers.{MonitOutputParser, SystemParser, ProcessParser}
+import myUtils.BufferedLineIterator
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers
 import spray.json.DefaultJsonProtocol
@@ -531,12 +532,12 @@ class ParsersTest extends FlatSpec with Matchers{
     val x =
     try {
       val p = Runtime.getRuntime().exec("cat /log")
-      val stdInput = new BufferedReader(new InputStreamReader(p.getInputStream))
-      val stdError = new BufferedReader(new InputStreamReader(p.getErrorStream))
+      val stdInput = new BufferedLineIterator(p.getInputStream)
+      val stdError = new BufferedLineIterator(p.getErrorStream)
       var s = ""
-      for (line <- stdInput.lines().iterator())
+      for (line <- stdInput)
         s += line + "\n"
-      if (stdError.lines().iterator().hasNext)
+      if (!stdError.isEmpty)
         "stdError"
       else {
         val x = MonitOutputParser.parseOption(s)
