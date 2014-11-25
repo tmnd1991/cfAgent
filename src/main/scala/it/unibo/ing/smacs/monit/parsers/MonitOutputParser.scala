@@ -3,7 +3,8 @@ package it.unibo.ing.smacs.monit.parsers
 import it.unibo.ing.smacs.monit.model.MonitInfo
 
 /**
- * Created by tmnd on 04/11/14.
+ * @author Antonio Murgia
+ *         parses the output of the monit status command into a Seq[MonitInfo]
  */
 object MonitOutputParser extends Parser[Seq[MonitInfo],String]{
   val myProcessParser = ProcessParser

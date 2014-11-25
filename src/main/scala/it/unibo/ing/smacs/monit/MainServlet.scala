@@ -1,6 +1,10 @@
 package it.unibo.ing.smacs.monit
 
-
+/**
+ * @author Antonio Murgia
+ *         Simple Servlet that launches the monit command and
+ *         wraps it in a json object
+ */
 
 import java.io.{IOException, InputStreamReader, BufferedReader}
 import it.unibo.ing.smacs.monit.model.MonitInfo
@@ -43,6 +47,7 @@ class MainServlet extends MonitrestfulinterfaceStack {
     }
     catch{
       case e : IOException => JsObject("error" -> JsString("I/O Error")).toString
+      case t : Throwable => JsObject("exception" -> JsString(t.getMessage)).toString
     }
   }
   

@@ -9,7 +9,8 @@ import spray.json._
 
 import myUtils.DateUtils
 /**
- * Created by tmnd on 03/11/14.
+ * @author Antonio Murgia
+ *         using spray-json library defines format of conversion from and to Json of all model classes
  */
 object JsonConversions extends DefaultJsonProtocol {
   implicit object durationJsonFormat extends JsonFormat[Duration]{

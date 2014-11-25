@@ -1,13 +1,15 @@
 package it.unibo.ing.smacs.monit.parsers
 
 import it.unibo.ing.smacs.monit.model.CpuUsage
-
+import it.unibo.ing.smacs.monit.PimpMyLib._
 /**
- * Created by tmnd on 03/11/14.
+ * @author Antonio Murgia
+ *         parses a Seq[String] got from monit status command into a CpuUsage
  */
 object CpuUsageParser extends Parser[CpuUsage,Seq[String]]{
   override def parse(seq: Seq[String]) = {
-    val togliPrimoEultimi3 = (s : String) => s.substring(1,s.length-3)
-    CpuUsage(togliPrimoEultimi3(seq.head).toDouble, togliPrimoEultimi3(seq.tail.head).toDouble, togliPrimoEultimi3(seq.tail.tail.head).toDouble)
+    CpuUsage(seq.head.mySubstring(1,-3).toDouble,
+             seq.tail.head.mySubstring(1,-3).toDouble,
+             seq.tail.tail.head.mySubstring(1,-3).toDouble)
   }
 }

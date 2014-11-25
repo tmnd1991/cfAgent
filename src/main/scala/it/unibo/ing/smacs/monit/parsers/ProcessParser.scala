@@ -7,7 +7,8 @@ import scala.concurrent.duration.Duration
 
 import java.util.Date
 /**
- * Created by tmnd on 31/10/14.
+ * @author Antonio Murgia
+ *         parses a Seq[String] got from monit status command into a MonitProcessInfo
  */
 object ProcessParser extends Parser[MonitProcessInfo,String]{
   val dateFormat = "EEE MMM dd HH:mm:ss yyyy"

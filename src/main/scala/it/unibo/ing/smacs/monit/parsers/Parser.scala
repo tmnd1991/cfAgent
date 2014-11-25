@@ -1,7 +1,9 @@
 package it.unibo.ing.smacs.monit.parsers
 
 /**
- * Created by tmnd on 03/11/14.
+ * @author Antonio Murgia
+ *         trait that defines parseOption and forces the developer to implement the parse method.
+ *         T is the returned type and K is the input parameter type
  */
 trait Parser[T,K] {
   def parse(x : K) : T

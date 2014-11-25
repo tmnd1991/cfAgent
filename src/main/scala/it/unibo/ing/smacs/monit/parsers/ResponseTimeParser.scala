@@ -6,7 +6,8 @@ import it.unibo.ing.smacs.monit.model.MonitResponseTime
 import myUtils.URLUtils
 
 /**
- * Created by tmnd on 03/11/14.
+ * @author Antonio Murgia
+ *         parses a Seq[String] got from monit status command into a MonitResponseTime
  */
 object ResponseTimeParser extends Parser[MonitResponseTime,Seq[String]]{
   val myDurationParser = DurationParser

@@ -7,7 +7,11 @@ import scala.concurrent.duration
 import scala.concurrent.duration.{FiniteDuration, Duration}
 
 /**
- * Created by tmnd on 01/11/14.
+ * @author Antonio Murgia
+ *         parses a Seq[String] got from monit status command into a scala.concurrent.Duration
+ *         can parse these two formats :
+ *         - 1d 1h 16m 4s
+ *         - 0.012 s
  */
 object DurationParser extends Parser[Duration,Seq[String]]{
   override def parse(seq : Seq[String]) = {

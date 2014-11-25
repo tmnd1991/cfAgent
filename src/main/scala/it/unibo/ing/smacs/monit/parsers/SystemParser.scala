@@ -9,7 +9,8 @@ import scala.concurrent.duration.Duration
 import it.unibo.ing.smacs.monit.PimpMyLib._
 
 /**
- * Created by tmnd on 03/11/14.
+ * @author Antonio Murgia
+ *         parses a Strin got from monit status command into a MonitSystemInfo
  */
 object SystemParser extends Parser[MonitSystemInfo,String]{
   val dateFormat = "EEE MMM dd HH:mm:ss yyyy"
