@@ -8,6 +8,7 @@ package it.unibo.ing.smacs.monit
 
 import java.io.{IOException, InputStreamReader, BufferedReader}
 import it.unibo.ing.smacs.monit.model.MonitInfo
+import myUtils.BufferedLineIterator
 
 import scala.collection.JavaConversions._
 import scala.collection.immutable.Stream.Empty
@@ -28,12 +29,11 @@ class MainServlet extends MonitrestfulinterfaceStack {
   get("/"){
     try {
       val p = Runtime.getRuntime().exec("/var/vcap/bosh/bin/monit status")
-      val stdInput = new BufferedReader(new InputStreamReader(p.getInputStream))
-      val stdError = new BufferedReader(new InputStreamReader(p.getErrorStream))
+      val stdInput = new BufferedLineIterator(p.getInputStream)
+      val stdError = new BufferedLineIterator(p.getErrorStream)
       var s = ""
-      for (line <- stdInput.lines().iterator())
-        s += line + "\n"
-      if (stdError.lines().iterator().hasNext)
+      stdInput.foreach(s += _ + "\n")
+      if (!stdError.isEmpty)
         JsObject("error" -> JsString("System Error")).toString
       else {
         import DefaultJsonProtocol._
