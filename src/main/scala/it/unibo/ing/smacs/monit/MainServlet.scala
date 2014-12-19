@@ -26,29 +26,27 @@ class MainServlet extends MonitrestfulinterfaceStack {
     contentType = "json"
   }
 
-  get("/"){
+  get("/") {
     try {
       val p = Runtime.getRuntime().exec("/var/vcap/bosh/bin/monit status")
       val stdInput = new BufferedLineIterator(p.getInputStream)
       val stdError = new BufferedLineIterator(p.getErrorStream)
-      var s = ""
-      stdInput.foreach(s += _ + "\n")
+      val s = stdInput.mkString("\n")
       if (!stdError.isEmpty)
         JsObject("error" -> JsString("System Error")).toString
       else {
         import DefaultJsonProtocol._
-        MonitOutputParser.parseOption(s) match{
-          case Some(x : Seq[MonitInfo]) => {
+        MonitOutputParser.parseOption(s) match {
+          case Some(x: Seq[MonitInfo]) => {
             x.toJson
           }
           case None => JsObject("error" -> JsString("Parse Error")).toString
         }
       }
     }
-    catch{
-      case e : IOException => JsObject("error" -> JsString("I/O Error")).toString
-      case t : Throwable => JsObject("exception" -> JsString(t.getMessage)).toString
+    catch {
+      case e: IOException => JsObject("error" -> JsString("I/O Error")).toString
+      case t: Throwable => JsObject("exception" -> JsString(t.getMessage)).toString
     }
   }
-  
 }

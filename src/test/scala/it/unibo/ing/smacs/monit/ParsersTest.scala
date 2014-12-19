@@ -532,22 +532,18 @@ class ParsersTest extends FlatSpec with Matchers{
     val x =
     try {
       val p = Runtime.getRuntime().exec("cat /log")
-      val stdInput = new BufferedLineIterator(p.getInputStream)
-      val stdError = new BufferedLineIterator(p.getErrorStream)
-      var s = ""
-      for (line <- stdInput)
-        s += line + "\n"
+      val stdInput = Iterator.continually(new BufferedReader(new InputStreamReader(p.getInputStream)).readLine()).takeWhile(_ != null)
+      val stdError = Iterator.continually(new BufferedReader(new InputStreamReader(p.getErrorStream)).readLine()).takeWhile(_ != null)
+      val s = stdInput.mkString("\n")
       if (!stdError.isEmpty)
         "stdError"
       else {
         val x = MonitOutputParser.parseOption(s)
-        x match{
-          case Some(_) => {
+        if (x != None){
             import DefaultJsonProtocol._
             x.get.toJson.toString
-          }
-          case None => "parse error"
         }
+        else "parse error"
       }
     }
     catch{
