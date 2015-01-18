@@ -33,7 +33,6 @@ class MainServlet extends MonitrestfulinterfaceStack {
       val stdError = new BufferedLineIterator(p.getErrorStream)
       val s = stdInput.mkString("\n")
       if (!stdError.isEmpty)
-
         JsObject("error" -> JsString("System Error")).toString
       else {
         import DefaultJsonProtocol._
