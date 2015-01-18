@@ -3,7 +3,7 @@ package it.unibo.ing.smacs.monit.parsers
 import java.util.Date
 
 import it.unibo.ing.smacs.monit.model._
-import myUtils.DateUtils
+import it.unibo.ing.utils.DateUtils
 
 import scala.concurrent.duration.Duration
 import it.unibo.ing.smacs.monit.PimpMyLib._

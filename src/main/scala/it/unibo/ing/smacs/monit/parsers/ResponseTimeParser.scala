@@ -3,7 +3,7 @@ package it.unibo.ing.smacs.monit.parsers
 import java.text.ParseException
 
 import it.unibo.ing.smacs.monit.model.MonitResponseTime
-import myUtils.URLUtils
+import it.unibo.ing.utils.URLUtils
 
 /**
  * @author Antonio Murgia

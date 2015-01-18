@@ -7,7 +7,7 @@ import scala.concurrent.duration.Duration
 import spray.json.DefaultJsonProtocol
 import spray.json._
 
-import myUtils.DateUtils
+import it.unibo.ing.utils.DateUtils
 /**
  * @author Antonio Murgia
  *         using spray-json library defines format of conversion from and to Json of all model classes

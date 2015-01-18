@@ -5,7 +5,7 @@ import java.io.{IOException, InputStreamReader, BufferedReader}
 import it.unibo.ing.smacs.monit.model.JsonConversions._
 import it.unibo.ing.smacs.monit.model.MonitStatus
 import it.unibo.ing.smacs.monit.parsers.{MonitOutputParser, SystemParser, ProcessParser}
-import myUtils.BufferedLineIterator
+import it.unibo.ing.utils.BufferedLineIterator
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers
 import spray.json.DefaultJsonProtocol

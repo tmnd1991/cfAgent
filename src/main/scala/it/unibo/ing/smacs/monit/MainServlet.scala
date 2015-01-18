@@ -8,7 +8,7 @@ package it.unibo.ing.smacs.monit
 
 import java.io.{IOException, InputStreamReader, BufferedReader}
 import it.unibo.ing.smacs.monit.model.MonitInfo
-import myUtils.BufferedLineIterator
+import it.unibo.ing.utils.BufferedLineIterator
 
 import scala.collection.JavaConversions._
 import scala.collection.immutable.Stream.Empty

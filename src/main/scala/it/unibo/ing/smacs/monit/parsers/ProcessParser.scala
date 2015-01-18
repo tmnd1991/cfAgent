@@ -1,7 +1,7 @@
 package it.unibo.ing.smacs.monit.parsers
 
 import it.unibo.ing.smacs.monit.model.{MonitResponseTime, MonitMonitoringStatus, MonitStatus, MonitProcessInfo}
-import myUtils.DateUtils
+import it.unibo.ing.utils.DateUtils
 
 import scala.concurrent.duration.Duration
 
