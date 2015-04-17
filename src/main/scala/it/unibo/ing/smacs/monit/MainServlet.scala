@@ -37,18 +37,18 @@ class MainServlet extends MonitrestfulinterfaceStack {
       newData match{
         case Some(data: Seq[MonitInfo]) => {
           RecentBuffer(realDate) = data
-          data.toJson.compactPrint
+          Ok(data.toJson.compactPrint)
         }
-        case _ => JsObject("error"->JsString("cannot retrieve monit data")).compactPrint
+        case _ => InternalServerError(JsObject("error"->JsString("cannot retrieve monit data")).compactPrint)
       }
     }
     else{
       import DefaultJsonProtocol._
       if (RecentBuffer contains realDate){
-        RecentBuffer(realDate).toJson.compactPrint
+        Ok(RecentBuffer(realDate).toJson.compactPrint)
       }
       else
-        JsObject("error"->JsString("cannot retrieve monit data")).compactPrint
+        InternalServerError(JsObject("error"->JsString("cannot retrieve monit data")).compactPrint)
     }
   }
 }
