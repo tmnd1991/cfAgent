@@ -7,6 +7,7 @@ package it.unibo.ing.smacs.monit
  */
 
 import java.io.{IOException, InputStreamReader, BufferedReader}
+import it.unibo.ing.smacs.monit.gatherer.DataGatherer
 import it.unibo.ing.smacs.monit.model.MonitInfo
 import it.unibo.ing.utils.BufferedLineIterator
 
@@ -27,26 +28,10 @@ class MainServlet extends MonitrestfulinterfaceStack {
   }
 
   get("/") {
-    try {
-      val p = Runtime.getRuntime().exec("/var/vcap/bosh/bin/monit status")
-      val stdInput = new BufferedLineIterator(p.getInputStream)
-      val stdError = new BufferedLineIterator(p.getErrorStream)
-      val s = stdInput.mkString("\n")
-      if (!stdError.isEmpty)
-        JsObject("error" -> JsString("System Error")).toString
-      else {
-        import DefaultJsonProtocol._
-        MonitOutputParser.parseOption(s) match {
-          case Some(x: Seq[MonitInfo]) => {
-            x.toJson
-          }
-          case None => JsObject("error" -> JsString("Parse Error")).toString
-        }
-      }
-    }
-    catch {
-      case e: IOException => JsObject("error" -> JsString("I/O Error")).toString
-      case t: Throwable => JsObject("exception" -> JsString(t.getMessage)).toString
+    import DefaultJsonProtocol._
+    DataGatherer.getData() match{
+      case Some(data: Seq[MonitInfo]) => data.toJson.compactPrint
+      case _ => JsObject("error"->JsString("cannot retrieve monit data"))
     }
   }
 }
