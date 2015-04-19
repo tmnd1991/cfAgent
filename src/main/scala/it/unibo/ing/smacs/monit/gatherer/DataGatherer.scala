@@ -39,5 +39,4 @@ object DataGatherer {
       Some(_lastData)
     }
   }
-
 }

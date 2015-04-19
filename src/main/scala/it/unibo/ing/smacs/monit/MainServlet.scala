@@ -27,8 +27,10 @@ class MainServlet extends MonitrestfulinterfaceStack {
   before() {
     contentType = "json"
   }
-
-  get("/:start/:end") {
+  get("/avaiable") {
+    Ok(RecentBuffer.keys.map(_.getTime).mkString("\n"))
+  }
+  get("/samples/:start/:end") {
     val start = params("start")
     val end = params("end")
     val startDate = new Date(start.toLong)
@@ -40,4 +42,5 @@ class MainServlet extends MonitrestfulinterfaceStack {
     else
       values.toJson.compactPrint
   }
+
 }
