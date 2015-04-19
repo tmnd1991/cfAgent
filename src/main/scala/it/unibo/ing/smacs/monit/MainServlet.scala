@@ -28,27 +28,16 @@ class MainServlet extends MonitrestfulinterfaceStack {
     contentType = "json"
   }
 
-  get("/:time") {
-    val tick = params("time")
-    val realDate = new Date(tick.toLong)
-    if (RecentBuffer isLatest realDate){
-      val newData = DataGatherer.getData()
-      import DefaultJsonProtocol._
-      newData match{
-        case Some(data: Seq[MonitInfo]) => {
-          RecentBuffer(realDate) = data
-          Ok(data.toJson.compactPrint)
-        }
-        case _ => InternalServerError(JsObject("error"->JsString("cannot retrieve monit data")).compactPrint)
-      }
-    }
-    else{
-      import DefaultJsonProtocol._
-      if (RecentBuffer contains realDate){
-        Ok(RecentBuffer(realDate).toJson.compactPrint)
-      }
-      else
-        InternalServerError(JsObject("error"->JsString("cannot retrieve monit data")).compactPrint)
-    }
+  get("/:start/:end") {
+    val start = params("start")
+    val end = params("end")
+    val startDate = new Date(start.toLong)
+    val endDate = new Date(end.toLong)
+    val values = RecentBuffer.between(startDate,endDate).flatten.toList
+    import DefaultJsonProtocol._
+    if (values.isEmpty)
+      InternalServerError(JsObject("error"->JsString("cannot retrieve monit data")).compactPrint)
+    else
+      values.toJson.compactPrint
   }
 }
