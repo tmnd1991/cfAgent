@@ -43,8 +43,8 @@ object JettyLauncher {
       override def run() : Unit = {
         logger.debug("gathering data")
         DataGatherer.getData() match{
-          case Some(s : Seq[MonitInfo]) => RecentBuffer(new Date())
-          case None =>
+          case Some(s : Seq[MonitInfo]) => RecentBuffer(new Date()) = s
+          case None => logger.info("cannot gather data")
         }
       }
     }
