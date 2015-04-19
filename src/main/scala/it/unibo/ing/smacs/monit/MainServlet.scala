@@ -28,7 +28,7 @@ class MainServlet extends MonitrestfulinterfaceStack {
     contentType = "json"
   }
   get("/avaiable") {
-    Ok(RecentBuffer.keys.map(_.getTime).mkString("\n"))
+    Ok(RecentBuffer.keys.map(_.getTime).mkString("[",",\n","]"))
   }
   get("/samples/:start/:end") {
     val start = params("start")
