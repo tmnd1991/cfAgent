@@ -37,10 +37,7 @@ class MainServlet extends MonitrestfulinterfaceStack {
     val endDate = new Date(end.toLong)
     val values = RecentBuffer.between(startDate,endDate).flatten.toList
     import DefaultJsonProtocol._
-    if (values.isEmpty)
-      InternalServerError(JsObject("error"->JsString("cannot retrieve monit data")).compactPrint)
-    else
-      values.toJson.compactPrint
+    values.toJson.compactPrint
   }
 
 }
