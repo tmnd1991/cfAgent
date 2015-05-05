@@ -1,4 +1,4 @@
-name := "monitrestfulinterface"
+name := "cfAgent"
 
 scalaVersion := "2.11.2"
 
